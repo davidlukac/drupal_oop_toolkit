@@ -1,18 +1,19 @@
 <?php
 
 /**
- * @file my_module.module
- * TODO: Enter file description here.
+ * @file oop_toolkit.module
+ * Initial module file for OOP Toolkit module.
+ * TODO: Add actual content of the module file.
  */
 
 /**
  * Form builder.
  */
-function my_module_settings_form($form, &$form_state) {
-  $form['my_module_variable_foo'] = array(
+function oop_toolkit_settings_form($form, &$form_state) {
+  $form['oop_toolkit__variable_foo'] = array(
     '#type' => 'textfield',
     '#title' => t('Foo'),
-    '#default_value' => variable_get('my_module_variable_foo', 42),
+    '#default_value' => variable_get('oop_toolkit_variable_foo', 42),
     '#required' => TRUE,
   );
 
@@ -39,14 +40,37 @@ function my_module_settings_form_submit($form, &$form_state) {
 /**
  * Implements hook_menu().
  */
-function my_module_menu() {
+function oop_toolkit_menu() {
   $items = array();
 
-  $items['admin/config/my_module'] = array(
-    'title' => 'Administer OPP Toolkit',
+  $items['admin/config/oop-toolkit'] = array(
+    'title' => 'OPP Toolkit Administration',
+    'description' => 'Configuration and adminstration pages for OOP Toolkit module.',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('my_module_settings_form'),
-    'access arguments' => array('administer my_module'),
+    'page arguments' => array('oop_toolkit_settings_form'),
+    'access arguments' => array('administer OOP toolkit'),
+    'type' => MENU_NORMAL_ITEM,
   );
+
   return $items;
+}
+
+/**
+ * Implements hook_help().
+ *
+ * Displays help and module information.
+ *
+ * @param path
+ *   Which path of the site we're using to display help
+ * @param arg
+ *   Array that holds the current path as returned from arg() function
+ * @return string Help text wrapped in t() and paragraph.
+ */
+function oop_toolkit_help($path, $arg) {
+  switch ($path) {
+    case "admin/help#oop_toolkit":
+      return '<p>' . t("Helper module for developer which provides classes and
+      functions to work with Drupal in OOP manner.") . '</p>';
+      break;
+  }
 }
