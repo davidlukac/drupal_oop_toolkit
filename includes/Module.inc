@@ -1,17 +1,20 @@
 <?php
 
-abstract class Module {
+abstract class Module extends Singleton {
 
   protected static $instance = null;
 
-  /* @var string Name of the Module. */
+  /* @var $name string Name of the Module. */
   protected $name;
-  /* @var string URL version of the Module name. Generally the same string as *name* with '-' instead of '_' */
+  /* @var $urlName string URL version of the Module name. Generally the same string as *name* with '-' instead of '_' */
   protected $urlName;
-  /* @var string Help text describing usage of the module. */
+  /* @var $helpText string Help text describing usage of the module. */
   protected $helpText;
-  /* @var string Path administration pages of the module. */
-  protected $adminPath;
+
+
+// @TODO: Not sure if we need this yet.
+//  /* @var $adminPath string Path administration pages of the module. */
+//  private $adminPath;
 
   /**
    * Constructs and returns path for Help page of the module.
@@ -53,47 +56,6 @@ abstract class Module {
   function getAdminPath() {
     $path = "admin/config/" . $this->urlName;
     return $path;
-  }
-
-  // ---------------------------------------------------------------------------
-  // --- Singleton helper functions. -------------------------------------------
-  // ---------------------------------------------------------------------------
-
-  /**
-   * @return Module Singleton instance of the Module class.
-   */
-  public static function getInstance() {
-    if (isset(static::$instance)) {
-      return static::$instance;
-    } else {
-      static::$instance = new static;
-      return static::$instance;
-    }
-  }
-
-  /**
-   * Protected constructor to prevent creating a new instance of the
-   * *Module* via the `new` operator from outside of this class.
-   */
-  protected function __construct() {
-  }
-
-  /**
-   * Private clone method to prevent cloning of the instance of the
-   * *Module* instance.
-   *
-   * @return Module
-   */
-  private function __clone() {
-  }
-
-  /**
-   * Private unserialize method to prevent unserializing of the *Module*
-   * instance.
-   *
-   * @return Module
-   */
-  private function __wakeup() {
   }
 
 }

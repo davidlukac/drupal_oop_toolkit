@@ -1,7 +1,5 @@
 <?php
 
-// use \OopToolkitModule as OopToolkitModule;
-
 /**
  * @file oop_toolkit.module
  * Initial module file for OOP Toolkit module.
@@ -17,6 +15,9 @@
  * @return string
  */
 function oop_toolkit_settings_form($form, &$form_state, $getName = FALSE) {
+  // This is a callback function, so if we want to reference it in different way,
+  // than by string, we need a 'flag' argument saying we need the function name
+  // to be returned.
   if ($getName) {
     return __FUNCTION__;
   }
@@ -52,9 +53,9 @@ function my_module_settings_form_submit($form, &$form_state) {
  * Implements hook_menu().
  */
 function oop_toolkit_menu() {
+  /* @var $module OopToolkitModule */
   $module = OopToolkitModule::getInstance();
   $callbackName = oop_toolkit_settings_form(null, new stdClass(), TRUE);
-  print_r($callbackName);
 
   $items = array();
 
@@ -62,7 +63,6 @@ function oop_toolkit_menu() {
     'title' => 'OPP Toolkit Administration',
     'description' => 'Configuration and adminstration pages for OOP Toolkit module.',
     'page callback' => 'drupal_get_form',
-    // 'page arguments' => array('oop_toolkit_settings_form'),
     'page arguments' => array($callbackName),
     'access arguments' => array('administer OOP toolkit'),
     'type' => MENU_NORMAL_ITEM,

@@ -6,6 +6,7 @@ package = Development
 
 files[] = includes/Module.inc
 files[] = includes/OopToolkitModule.inc
+files[] = includes/Singleton.inc
 files[] = includes/Variable.inc
 
 configure = admin/config/oop-toolkit
