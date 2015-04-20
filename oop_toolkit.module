@@ -1,5 +1,7 @@
 <?php
 
+// use \OopToolkitModule as OopToolkitModule;
+
 /**
  * @file oop_toolkit.module
  * Initial module file for OOP Toolkit module.
@@ -8,9 +10,18 @@
 
 /**
  * Form builder.
+ *
+ * @param $form
+ * @param $form_state
+ * @param bool $getName
+ * @return string
  */
-function oop_toolkit_settings_form($form, &$form_state) {
-  $form['oop_toolkit__variable_foo'] = array(
+function oop_toolkit_settings_form($form, &$form_state, $getName = FALSE) {
+  if ($getName) {
+    return __FUNCTION__;
+  }
+
+  $form['oop_toolkit_variable_foo'] = array(
     '#type' => 'textfield',
     '#title' => t('Foo'),
     '#default_value' => variable_get('oop_toolkit_variable_foo', 42),
@@ -41,13 +52,18 @@ function my_module_settings_form_submit($form, &$form_state) {
  * Implements hook_menu().
  */
 function oop_toolkit_menu() {
+  $module = OopToolkitModule::getInstance();
+  $callbackName = oop_toolkit_settings_form(null, new stdClass(), TRUE);
+  print_r($callbackName);
+
   $items = array();
 
-  $items['admin/config/oop-toolkit'] = array(
+  $items[$module->getAdminPath()] = array(
     'title' => 'OPP Toolkit Administration',
     'description' => 'Configuration and adminstration pages for OOP Toolkit module.',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('oop_toolkit_settings_form'),
+    // 'page arguments' => array('oop_toolkit_settings_form'),
+    'page arguments' => array($callbackName),
     'access arguments' => array('administer OOP toolkit'),
     'type' => MENU_NORMAL_ITEM,
   );
@@ -67,10 +83,10 @@ function oop_toolkit_menu() {
  * @return string Help text wrapped in t() and paragraph.
  */
 function oop_toolkit_help($path, $arg) {
+  $module = OopToolkitModule::getInstance();
   switch ($path) {
-    case "admin/help#oop_toolkit":
-      return '<p>' . t("Helper module for developer which provides classes and
-      functions to work with Drupal in OOP manner.") . '</p>';
+    case $module->getHelpPath():
+      return $module->getFormattedHelpText();
       break;
   }
 }
