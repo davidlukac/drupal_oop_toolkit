@@ -2,11 +2,12 @@
 
 abstract class Module extends Singleton {
 
-  protected static $instance = null;
+
 
   /* @var $name string Name of the Module. */
   protected $name;
-  /* @var $urlName string URL version of the Module name. Generally the same string as *name* with '-' instead of '_' */
+  /* @var $urlName string URL version of the Module name.
+   * Generally the same string as *name* with '-' instead of '_' */
   protected $urlName;
   /* @var $helpText string Help text describing usage of the module. */
   protected $helpText;
@@ -21,7 +22,7 @@ abstract class Module extends Singleton {
    * @return string Help path.
    */
   function getHelpPath() {
-    $helpPath = "admin/help" . "#" . $this->getName();
+    $helpPath = "admin/help" . "#" . $this->urlName;
     return $helpPath;
   }
 

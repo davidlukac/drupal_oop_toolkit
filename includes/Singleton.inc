@@ -1,13 +1,17 @@
 <?php
 
 /**
- * @file Singleton class.
+ * @file Singleton.inc
+ * Simple Singleton base class.
  */
 
 /**
  * Class Singleton - base class for all our singletons.
  */
 abstract class Singleton {
+
+  /* @var $instance \Singleton Static holder of the Singleton instance. */
+  protected static $instance = null;
 
   /**
    * @return Singleton Singleton instance of the Module class.

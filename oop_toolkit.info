@@ -4,9 +4,11 @@ core = 7.x
 
 package = Development
 
+files[] = includes/MenuItem.inc
 files[] = includes/Module.inc
+files[] = includes/OopToolkitAdminMenuItem.inc
 files[] = includes/OopToolkitModule.inc
 files[] = includes/Singleton.inc
 files[] = includes/Variable.inc
 
-configure = admin/config/oop-toolkit
+configure = admin/config/oop_toolkit
