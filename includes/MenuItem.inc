@@ -1,6 +1,13 @@
 <?php
+/**
+ * @file
+ * MenuItem.inc - MenuItem class definition.
+ */
 
-class MenuItem extends Singleton {
+/**
+ * Class MenuItem - provides interface for working with single menu item.
+ */
+abstract class MenuItem extends InitialisedSingleton {
 
   protected $title;
   protected $description;
@@ -9,32 +16,54 @@ class MenuItem extends Singleton {
   protected $type;
   protected $pageArguments;
 
-  /** @var $module \Module this item belongs to. */
+  /* @var $module \Module this item belongs to. */
   private $module;
 
   /**
-   * Menu item constructor.
-   * @param string $title Menu item title.
-   * @param \Module $module to which this menu item belongs.
+   * Mirroring menu item types from Drupal internal definitions.
+   *
+   * @see menu.inc.
    */
-  public function __construct($title, Module $module) {
-    // @TODO: Do we want to do some validation here? These params are mandatory.
-    $this->title = $title;
-    $this->module = $module;
-  }
+  const MENU_CALLBACK = MENU_CALLBACK;
+  const MENU_DEFAULT_LOCAL_TASK = MENU_DEFAULT_LOCAL_TASK;
+  const MENU_LOCAL_ACTION = MENU_LOCAL_ACTION;
+  const MENU_LOCAL_TASK = MENU_LOCAL_TASK;
+  const MENU_NORMAL_ITEM = MENU_NORMAL_ITEM;
+  const MENU_SUGGESTED_ITEM = MENU_SUGGESTED_ITEM;
 
-  public static function getInstance(\Module $module) {
+  /**
+   * Initialization function of the MenuItem.
+   *
+   * @param \Module $module
+   *   DI of which Module this MenuItem belongs to.
+   */
+  public function setModule(\Module $module) {
+    // @TODO: Need to decide what would be the approach to do this DI.
     /* @var $instance \MenuItem */
-    $instance = parent::getInstance();
     $instance->module = $module;
-
-    return $instance;
   }
+
+//  /**
+//   * Menu item constructor.
+//   *
+//   * @param string $title
+//   *   Menu item title.
+//   * @param \Module $module
+//   *   Module to which this menu item belongs.
+//   *
+//   * @deprecated Do not use the constructor, use 'setModule' instead.
+//   */
+//  public function __construct($title, Module $module) {
+//    // @TODO: Do we want to do some validation here? These params are mandatory.
+//    $this->title = $title;
+//    $this->module = $module;
+//  }
 
   /**
    * Returns menu item description as string.
    *
    * @return string
+   *   Menu item description.
    */
   public function getDescription() {
     return $this->description;
@@ -44,80 +73,98 @@ class MenuItem extends Singleton {
    * Setter for menu item description.
    *
    * @param string $description
+   *   Menu item description.
    */
   public function setDescription($description) {
     $this->description = $description;
   }
 
   /**
-   * @TODO: Add documentation.
+   * Callback function getter.
+   *
    * @return mixed
+   *   Callback function for path of this menu.
    */
   public function getPageCallback() {
     return $this->pageCallback;
   }
 
   /**
-   * @TODO: Add documentation.
-   * @param mixed $pageCallback
+   * Callback function setter.
+   *
+   * @param string $page_callback
+   *    Callback function name.
    */
-  public function setPageCallback($pageCallback) {
-    $this->pageCallback = $pageCallback;
+  public function setPageCallback($page_callback) {
+    $this->pageCallback = $page_callback;
   }
 
   /**
-   * @TODO: Add documentation.
+   * Access arguments getter.
+   *
    * @return mixed
+   *    Array of access arguments.
    */
   public function getAccessArguments() {
     return $this->accessArguments;
   }
 
   /**
-   * @TODO: Add documentation.
-   * @param mixed $accessArguments
+   * Access arguments setter.
+   *
+   * @param mixed $access_arguments
+   *    Array of access arguments.
    */
-  public function setAccessArguments($accessArguments) {
-    $this->accessArguments = $accessArguments;
+  public function setAccessArguments($access_arguments) {
+    $this->accessArguments = $access_arguments;
   }
 
   /**
-   * @TODO: Add documentation.
+   * Menu type getter.
+   *
    * @return mixed
+   *    Returns menu type.
    */
   public function getType() {
     return $this->type;
   }
 
   /**
-   * @TODO: Add documentation.
+   * Menu type setter.
+   *
    * @param mixed $type
+   *   Menu type constant.
    */
   public function setType($type) {
     $this->type = $type;
   }
 
   /**
-   * @TODO: Add documentation.
+   * Page arguments getter.
+   *
    * @return mixed
+   *    Array of page arguments.
    */
   public function getPageArguments() {
     return $this->pageArguments;
   }
 
   /**
-   * @TODO: Add documentation.
-   * @param mixed $pageArguments
+   * Function to set page arguments.
+   *
+   * @param mixed $page_arguments
+   *    Page arguments.
    */
-  public function setPageArguments($pageArguments) {
-    $this->pageArguments = $pageArguments;
+  public function setPageArguments($page_arguments) {
+    $this->pageArguments = $page_arguments;
   }
 
 
   /**
    * Returns Drupal array representation of this menu item.
    *
-   * @return array Menu item array representation.
+   * @return array
+   *   Menu item array representation.
    */
   public function getMenuItem() {
     $path = $this->module->getAdminPath();
@@ -135,4 +182,5 @@ class MenuItem extends Singleton {
 
     return $items;
   }
+
 }
