@@ -10,6 +10,12 @@
  */
 abstract class Module extends InitialisedSingleton {
 
+  /**
+   * @defgroup Init_vars Initialisation variables.
+   * @{
+   * These variables should be defined in extending class.
+   */
+
   /* @var $name string Name of the Module. */
   protected $name;
   /* @var $urlName string URL version of the Module name.
@@ -17,9 +23,15 @@ abstract class Module extends InitialisedSingleton {
   protected $urlName;
   /* @var $helpText string Help text describing usage of the module. */
   protected $helpText;
+  /* @var $adminGroup @TODO: Add description. */
+  protected $adminGroup;
+
+  /**
+   * @} End of "defgroup Init_vars"
+   */
 
   /* @var $menu_items array of \MenuItem */
-  protected $menuItems;
+  protected $menuItems = array();
 
   /**
    * Constructs and returns path for Help page of the module.
@@ -72,7 +84,7 @@ abstract class Module extends InitialisedSingleton {
    *   Settings page URL.
    */
   public function getAdminPath() {
-    $path = "admin/config/" . $this->urlName;
+    $path = "admin/config/" . isset($this->adminGroup) ? $this->adminGroup . "/" : "" . $this->urlName;
     return $path;
   }
 

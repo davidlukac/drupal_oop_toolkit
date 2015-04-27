@@ -4,6 +4,7 @@ core = 7.x
 
 package = Development
 
+files[] = includes/Form.inc
 files[] = includes/InitialisedSingleton.inc
 files[] = includes/MenuItem.inc
 files[] = includes/Module.inc
