@@ -1,0 +1,17 @@
+name = Drupal OOP Toolkit
+description = Drupal OOP library - a set of helpers and classes for working with Drupal in OOP manner.
+core = 7.x
+
+package = Development
+
+files[] = includes/Form.inc
+files[] = includes/InitialisedSingleton.inc
+files[] = includes/MenuItem.inc
+files[] = includes/Module.inc
+files[] = includes/Singleton.inc
+files[] = includes/Variable.inc
+
+files[] = specific/OopToolkitAdminMenuItem.inc
+files[] = specific/OopToolkitModule.inc
+
+configure = admin/config/oop_toolkit

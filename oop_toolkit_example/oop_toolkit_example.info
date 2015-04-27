@@ -1,0 +1,11 @@
+name = Drupal OOP Toolkit Example
+description = Example module of how to use teh OOP toolkit.
+core = 7.x
+package = Development
+
+dependencies[] = oop_toolkit
+
+files[] = includes/OopToolkitExampleExampleVariable.inc
+files[] = includes/OopToolkitExampleModule.inc
+
+configure = admin/config/oop_toolkit/oop_toolkit_example
