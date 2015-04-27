@@ -21,8 +21,6 @@ abstract class Module extends InitialisedSingleton {
   /* @var $menu_items array of \MenuItem */
   protected $menuItems;
 
-
-
   /**
    * Constructs and returns path for Help page of the module.
    *
@@ -61,7 +59,9 @@ abstract class Module extends InitialisedSingleton {
    *   Formatted help text.
    */
   public function getFormattedHelpText() {
-    $text = '<p>' . t($this->getHelpText()) . '</p>';
+    // @TODO: Getter could return text value already in t()?
+    $help_text = $this->getHelpText();
+    $text = '<p>' . t($help_text) . '</p>';
     return $text;
   }
 

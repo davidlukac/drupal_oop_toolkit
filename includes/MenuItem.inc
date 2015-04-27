@@ -38,9 +38,7 @@ abstract class MenuItem extends InitialisedSingleton {
    *   DI of which Module this MenuItem belongs to.
    */
   public function setModule(\Module $module) {
-    // @TODO: Need to decide what would be the approach to do this DI.
-    /* @var $instance \MenuItem */
-    $instance->module = $module;
+    $this->module = $module;
   }
 
 //  /**
@@ -167,6 +165,7 @@ abstract class MenuItem extends InitialisedSingleton {
    *   Menu item array representation.
    */
   public function getMenuItem() {
+    // @TODO: Do we need a validation here? What if the module dependency hasn't been injected?
     $path = $this->module->getAdminPath();
 
     $items = array();
