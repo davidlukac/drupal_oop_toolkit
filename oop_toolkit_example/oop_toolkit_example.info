@@ -5,7 +5,7 @@ package = Development
 
 dependencies[] = oop_toolkit
 
+files[] = includes/OopToolkitExampleExampleVariable.inc
 files[] = includes/OopToolkitExampleModule.inc
-files[] = includes/OopToolkitExampleVariable.inc
 
-configure = admin/config/oop-toolkit/example-settings
+configure = admin/config/oop_toolkit/oop_toolkit_example
