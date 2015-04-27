@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * File oop_toolkit.module - OOP Toolkit module file.
+ *
+ * Initial module file for OOP Toolkit module. OOP Toolkit provides development
+ * interface for working with Drupal in OOP manner.
+ */
+
+module_load_include('inc', 'oop_toolkit', 'specific/callbacks');
+
+/**
+ * Form validate handler.
+ */
+function my_module_settings_form_validate($form, &$form_state) {
+  // @TODO: Do something with me!
+  if ($form_state['values']['element'] != 'hello') {
+    form_set_error('element', t('Please say hello?'));
+  }
+}
+
+/**
+ * Form submit handler.
+ */
+function my_module_settings_form_submit($form, &$form_state) {
+  // @TODO: Do something with me!
+}
+
+/**
+ * Implements hook_menu().
+ *
+ * @return array
+ *    Returns \MenuItem element converted into Drupal array.
+ */
+function oop_toolkit_menu() {
+  /* @var $module OopToolkitModule */
+  $module = OopToolkitModule::getInstance();
+
+  /* @var $menu_item \OopToolkitAdminMenuItem */
+  $menu_item = OopToolkitAdminMenuItem::getInstance();
+  $items = $menu_item->getMenuItem();
+
+  return $items;
+}
+
+/**
+ * Implements hook_help().
+ *
+ * Displays help and module information.
+ *
+ * @param string $path
+ *    Which path of the site we're using to display help.
+ * @param array $arg
+ *    Array that holds the current path as returned from arg() function.
+ *
+ * @return string
+ *    Help text wrapped in t() and paragraph.
+ */
+function oop_toolkit_help($path, array $arg) {
+  /* @var $module OopToolkitModule */
+  $module = OopToolkitModule::getInstance();
+  $formatted_text = $module->getFormattedHelpText();
+
+  switch ($path) {
+    case $module->getHelpPath():
+      return $formatted_text;
+  }
+
+}
