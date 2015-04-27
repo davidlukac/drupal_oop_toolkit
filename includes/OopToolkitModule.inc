@@ -24,6 +24,7 @@ class OopToolkitModule extends Module {
     $admin_menu = OopToolkitAdminMenuItem::getInstance();
     // Let's inject module to the menu item, so it's aware of it's context.
     $this->addMenuItem($admin_menu);
+    // @TODO: Probably we want to do DI in some other way, not in initialisation function of a Singleton. Probably some Factory pattern.
   }
 
 }

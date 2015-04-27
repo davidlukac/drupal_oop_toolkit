@@ -21,8 +21,8 @@ class OopToolkitAdminMenuItem extends MenuItem {
    * Initialisation function implementation.
    */
   protected function initialise() {
-    $callback_name = oop_toolkit_settings_form(NULL, new stdClass(), TRUE);
-    $this->setPageArguments($callback_name);
+    $callback_name = oop_toolkit_settings_form(array(), new stdClass(), TRUE);
+    $this->setPageArguments(array($callback_name));
     $this->setAccessArguments(array('access administration pages'));
   }
 
