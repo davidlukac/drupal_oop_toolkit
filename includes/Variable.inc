@@ -11,12 +11,14 @@
  * Class Variable.
  */
 abstract class Variable extends Singleton {
+
+  // @TODO: These vars should be set in extending class?
   /* @var string Name of the variable used in Drupal. */
-  private $name = NULL;
+  protected $name = NULL;
 
   // @TODO Clarify what type of variable to use here.
   /* @var mixed Default value. */
-  private $default = NULL;
+  protected $default = NULL;
 
   /**
    * Validations to run when Variable is instantiated.
