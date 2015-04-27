@@ -29,6 +29,9 @@ function oop_toolkit_settings_form(array $form, &$form_state, $get_name = FALSE)
     return __FUNCTION__;
   }
 
+  // There's currently no configuration form to return.
+  return array();
+
   $form['oop_toolkit_variable_foo'] = array(
     '#type' => 'textfield',
     '#title' => t('Foo'),
