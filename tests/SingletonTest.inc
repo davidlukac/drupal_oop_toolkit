@@ -1,13 +1,12 @@
 <?php
 
-error_reporting( E_ALL );
+/**
+ * @file
+ * Singleton class test.
+ */
 
-//
-///**
-// * @file
-// * Singleton class test.
-// */
-//
+// error_reporting( E_ALL );
+// @TODO: Convert this into proper PhpUnit test.
 
 require_once "../includes/Singleton.inc";
 require_once "../includes/InitialisedSingleton.inc";
@@ -182,4 +181,3 @@ function test2() {
 }
 
 test2();
-?>

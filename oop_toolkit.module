@@ -8,7 +8,7 @@
  * interface for working with Drupal in OOP manner.
  */
 
-module_load_include('inc', 'oop_toolkit', 'includes/callbacks');
+module_load_include('inc', 'oop_toolkit', 'specific/callbacks');
 
 /**
  * Form validate handler.

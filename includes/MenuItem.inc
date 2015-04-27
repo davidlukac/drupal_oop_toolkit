@@ -41,22 +41,6 @@ abstract class MenuItem extends InitialisedSingleton {
     $this->module = $module;
   }
 
-//  /**
-//   * Menu item constructor.
-//   *
-//   * @param string $title
-//   *   Menu item title.
-//   * @param \Module $module
-//   *   Module to which this menu item belongs.
-//   *
-//   * @deprecated Do not use the constructor, use 'setModule' instead.
-//   */
-//  public function __construct($title, Module $module) {
-//    // @TODO: Do we want to do some validation here? These params are mandatory.
-//    $this->title = $title;
-//    $this->module = $module;
-//  }
-
   /**
    * Returns menu item description as string.
    *

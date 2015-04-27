@@ -84,7 +84,8 @@ abstract class Module extends InitialisedSingleton {
    *   Settings page URL.
    */
   public function getAdminPath() {
-    $path = "admin/config/" . isset($this->adminGroup) ? $this->adminGroup . "/" : "" . $this->urlName;
+    // Add '$this->adminGroup' to the path if it's set.
+    $path = "admin/config/" . ((isset($this->adminGroup) AND (FALSE == empty($this->adminGroup))) ? ($this->adminGroup . "/") : "") . $this->urlName;
     return $path;
   }
 

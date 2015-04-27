@@ -8,9 +8,10 @@ files[] = includes/Form.inc
 files[] = includes/InitialisedSingleton.inc
 files[] = includes/MenuItem.inc
 files[] = includes/Module.inc
-files[] = includes/OopToolkitAdminMenuItem.inc
-files[] = includes/OopToolkitModule.inc
 files[] = includes/Singleton.inc
 files[] = includes/Variable.inc
+
+files[] = specific/OopToolkitAdminMenuItem.inc
+files[] = specific/OopToolkitModule.inc
 
 configure = admin/config/oop_toolkit
