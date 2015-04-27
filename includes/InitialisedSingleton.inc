@@ -13,9 +13,6 @@
  */
 abstract class InitialisedSingleton extends Singleton {
 
-  /* @var $initialised boolean */
-  private $initialised = FALSE;
-
   /**
    * Set up all module's dependencies.
    *
@@ -29,16 +26,27 @@ abstract class InitialisedSingleton extends Singleton {
    *
    * So we can run initialisation routine as well.
    *
+   * @TODO: Needs research - for some reason we can't just call parent::getInstance();
+   *
    * @return object
    *   \Singleton
    */
   public static function getInstance() {
-    /* @var $instance \InitialisedSingleton */
-    $instance = parent::getInstance();
+    /* @var $initialised boolean */
+    static $initialised = FALSE;
+
+    /* @var $instance \InitialisedSingleton Static holder of the Singleton instance. */
+    static $instance = NULL;
+
+    if ($instance == NULL) {
+      // @TODO: Needs research - for some reason we can't just call parent::getInstance();
+      $instance = new static();
+    }
+
     // Let the initialisation happen only once.
-    if (FALSE == $instance->initialised) {
+    if (FALSE == $initialised) {
       $instance->initialise();
-      $instance->initialised = TRUE;
+      $initialised = TRUE;
     }
 
     return $instance;
