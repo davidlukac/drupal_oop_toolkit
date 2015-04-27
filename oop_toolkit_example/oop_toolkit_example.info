@@ -5,6 +5,7 @@ package = Development
 
 dependencies[] = oop_toolkit
 
-files[] = includes/ExampleVariable.php
+files[] = includes/OopToolkitExampleModule.inc
+files[] = includes/OopToolkitExampleVariable.inc
 
-configure = admin/config/oop-toolkit/example
+configure = admin/config/oop-toolkit/example-settings

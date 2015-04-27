@@ -1,26 +1,31 @@
 <?php
 
-use \ExampleVariable as ExampleVariable;
-
-/*
+/**
  * @file
- * Example module file creating administration page with usage of Variable class.
+ * File oop_toolkit_example.module.
+ *
+ * Example module file creating administration page,
+ * with usage of Variable class.
  */
 
 /**
- * Implements hook_menu().
+ * Implements hook_form().
+ *
  * Example administration page using Variable class.
- * @return array System settings form structure.
+ *
+ * @return array
+ *   System settings form structure. Form builder.
  */
-function oop_toolkit_example_admin() {
+function oop_toolkit_example_settings_form() {
   $form = array();
 
-  $exampleVar = new ExampleVariable();
+  /* @var $example_var \OopToolkitExampleVariable */
+  $example_var = OopToolkitExampleVariable::getInstance();
 
-  $form['oop-toolkit-example_admin'] = array(
+  $form['oop-toolkit-example-settings'] = array(
     '#type' => 'textfield',
     '#title' => t('Example variable value'),
-    '#default_value' => $exampleVar->getDefault(),
+    '#default_value' => $example_var->getDefault(),
     '#size' => 2,
     '#maxlength' => 2,
     '#description' => t("The maximum number of links to display in the block."),
@@ -28,4 +33,22 @@ function oop_toolkit_example_admin() {
   );
 
   return system_settings_form($form);
+}
+
+/**
+ * Implements hook_menu().
+ */
+function oop_toolkit_example_menu() {
+
+  /* @var $module \OopToolkitExampleModule */
+  $module = OopToolkitExampleModule::getInstance();
+
+  $form = new Form($module->getAdminPath(), 'Example administration for OPP Toolkit module');
+  $form->setDescription('Example administration pages for OOP Toolkit module.');
+  $form->setPageCallback('drupal_get_form');
+  $form->setPageArguments(array('oop_toolkit_example_settings_form'));
+  $form->setAccessArguments(array('administer OOP toolkit'));
+  $form->setType(MenuItem::MENU_NORMAL_ITEM);
+
+  return $form->getForm();
 }
