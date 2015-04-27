@@ -1,42 +1,20 @@
 <?php
 
 /**
- * @file oop_toolkit.module
- * Initial module file for OOP Toolkit module.
- * TODO: Add actual content of the module file.
- */
-
-/**
- * Form builder.
+ * @file
+ * File oop_toolkit.module - OOP Toolkit module file.
  *
- * @param $form
- * @param $form_state
- * @param bool $getName
- * @return string
+ * Initial module file for OOP Toolkit module. OOP Toolkit provides development
+ * interface for working with Drupal in OOP manner.
  */
-function oop_toolkit_settings_form($form, &$form_state, $getName = FALSE) {
-  // This is a callback function, so if we want to reference it in different way,
-  // than by string, we need a 'flag' argument saying we need the function name
-  // to be returned.
-  if ($getName) {
-    return __FUNCTION__;
-  }
 
-  $form['oop_toolkit_variable_foo'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Foo'),
-    '#default_value' => variable_get('oop_toolkit_variable_foo', 42),
-    '#required' => TRUE,
-  );
-
-  // TODO! You probably don't need validation or submit handlers if using system_settings_form().
-  return system_settings_form($form);
-}
+module_load_include('inc', 'oop_toolkit', 'includes/callbacks');
 
 /**
  * Form validate handler.
  */
 function my_module_settings_form_validate($form, &$form_state) {
+  // @TODO: Do something with me!
   if ($form_state['values']['element'] != 'hello') {
     form_set_error('element', t('Please say hello?'));
   }
@@ -46,27 +24,22 @@ function my_module_settings_form_validate($form, &$form_state) {
  * Form submit handler.
  */
 function my_module_settings_form_submit($form, &$form_state) {
-
+  // @TODO: Do something with me!
 }
 
 /**
  * Implements hook_menu().
+ *
+ * @return array
+ *    Returns \MenuItem element converted into Drupal array.
  */
 function oop_toolkit_menu() {
   /* @var $module OopToolkitModule */
   $module = OopToolkitModule::getInstance();
-  $callbackName = oop_toolkit_settings_form(null, new stdClass(), TRUE);
 
-  $items = array();
-
-  $items[$module->getAdminPath()] = array(
-    'title' => 'OPP Toolkit Administration',
-    'description' => 'Configuration and adminstration pages for OOP Toolkit module.',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array($callbackName),
-    'access arguments' => array('administer OOP toolkit'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+  /* @var $menu_item \OopToolkitAdminMenuItem */
+  $menu_item = OopToolkitAdminMenuItem::getInstance();
+  $items = $menu_item->getMenuItem();
 
   return $items;
 }
@@ -76,17 +49,22 @@ function oop_toolkit_menu() {
  *
  * Displays help and module information.
  *
- * @param path
- *   Which path of the site we're using to display help
- * @param arg
- *   Array that holds the current path as returned from arg() function
- * @return string Help text wrapped in t() and paragraph.
+ * @param string $path
+ *    Which path of the site we're using to display help.
+ * @param array $arg
+ *    Array that holds the current path as returned from arg() function.
+ *
+ * @return string
+ *    Help text wrapped in t() and paragraph.
  */
-function oop_toolkit_help($path, $arg) {
+function oop_toolkit_help($path, array $arg) {
+  /* @var $module OopToolkitModule */
   $module = OopToolkitModule::getInstance();
+  $formatted_text = $module->getFormattedHelpText();
+
   switch ($path) {
     case $module->getHelpPath():
-      return $module->getFormattedHelpText();
-      break;
+      return $formatted_text;
   }
+
 }
