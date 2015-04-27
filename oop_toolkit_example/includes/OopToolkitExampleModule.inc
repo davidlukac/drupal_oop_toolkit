@@ -10,8 +10,10 @@
  */
 class OopToolkitExampleModule extends Module {
 
-  protected $name = "oop_toolkit_example_module";
-
+  protected $name = "oop_toolkit_example";
+  protected $urlName = "oop_toolkit_example";
+  protected $helpText = "This is an example implementation module of OOP Toolkit module.
+    It's purpose is to demonstrate functionality and API usage of the module.";
   protected $adminGroup = "oop_toolkit";
 
   /**

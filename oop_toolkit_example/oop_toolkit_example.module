@@ -8,32 +8,7 @@
  * with usage of Variable class.
  */
 
-/**
- * Implements hook_form().
- *
- * Example administration page using Variable class.
- *
- * @return array
- *   System settings form structure. Form builder.
- */
-function oop_toolkit_example_settings_form() {
-  $form = array();
-
-  /* @var $example_var \OopToolkitExampleVariable */
-  $example_var = OopToolkitExampleVariable::getInstance();
-
-  $form['oop-toolkit-example-settings'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Example variable value'),
-    '#default_value' => $example_var->getDefault(),
-    '#size' => 2,
-    '#maxlength' => 2,
-    '#description' => t("The maximum number of links to display in the block."),
-    '#required' => TRUE,
-  );
-
-  return system_settings_form($form);
-}
+module_load_include('inc', 'oop_toolkit_example', 'includes/callbacks');
 
 /**
  * Implements hook_menu().
@@ -51,4 +26,17 @@ function oop_toolkit_example_menu() {
   $form->setType(MenuItem::MENU_NORMAL_ITEM);
 
   return $form->getForm();
+}
+
+/**
+ * Implements hook_help().
+ */
+function oop_toolkit_example_help($path, $arg) {
+  /* @var $module OopToolkitExampleModule */
+  $module = OopToolkitExampleModule::getInstance();
+
+  switch ($path) {
+    case ($module->getHelpPath()):
+      return $module->getFormattedHelpText();
+  }
 }
